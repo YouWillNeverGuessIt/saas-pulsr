@@ -3,22 +3,22 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as url from 'url';
 import * as bodyParser from 'body-parser';
-import {IProfile} from './IProfile';
+import {Teacher} from './TeacherProfile';
 
 // Creates and configures an ExpressJS web server.
 class App {
 
   // ref to Express instance
   public express: express.Application;
-  public profiles: Array<IProfile>;
+  public profiles: Array<Teacher>;
   //Run configuration methods on the Express instance.
   constructor() {
     this.express = express();
     this.middleware();
     this.routes();
-    this.profiles = new Array<IProfile>();
-    this.profiles.push(new IProfile(1,'wes', 31,'wesley@gmail.com'));
-    this.profiles.push(new IProfile(2,'Troy', 21,'troy@gmail.com'));
+    this.profiles = new Array<Teacher>();
+    this.profiles.push(new Teacher(1,'wes', 31,'wesley@gmail.com'));
+    this.profiles.push(new Teacher(2,'Troy', 21,'troy@gmail.com'));
   }
 
   // Configure Express middleware.
@@ -56,7 +56,7 @@ class App {
       const n = req.body.name;
       const a = parseInt(req.body.age);
       const e = req.body.email;
-      const profile = new IProfile(id,n,a,e);
+      const profile = new Teacher(id,n,a,e);
       this.profiles.push(profile);
       res.send(profile);
     })
